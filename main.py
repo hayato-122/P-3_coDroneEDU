@@ -38,7 +38,6 @@ else:
         emergency_stop.emergency_stop(drone)
     finally:
         print("プログラムを終了します")
-        drone.land()
         drone.close()
 
 
