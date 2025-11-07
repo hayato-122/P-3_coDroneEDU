@@ -1,11 +1,11 @@
 import calibrate
 
-def start(drone):
+def start(drone,set_trim):
     try:
         # ドローンとPCを接続する
         drone.pair()
         # トリム値を設定
-        roll_trim,pitch_trim = calibrate.load_trim_config() # config.iniファイルのトリム値を代入
+        roll_trim,pitch_trim = set_trim.load_trim_config() # config.iniファイルのトリム値を代入
         drone.set_trim(roll_trim,pitch_trim) # トリム値を設定
         # 離陸する
         drone.takeoff()
