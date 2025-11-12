@@ -77,7 +77,7 @@ def move_test(drone: Drone):
     print("動作18")
 
     # ランディングポイント上空
-    drone.move_distance(0, 0.5, 0, 1)       # 次回着陸
+    drone.move_distance(0, 0.5, 0, 1)       # 次回着陸より作業開始
     drone.hover(3)
     print("動作19")
 
