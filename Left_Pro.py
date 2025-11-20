@@ -1,4 +1,6 @@
+import time
 from codrone_edu.drone import Drone
+import configparser
 
 def move_test(drone: Drone):
     poll_down = -0.45      # カードドロップの時に下げる値
@@ -81,4 +83,33 @@ def move_test(drone: Drone):
     drone.hover(3)
     print("動作19")
 
+
+drone=Drone()
+
+# config.iniファイルのトリム値を代入
+config_file = 'config.ini'
+config = configparser.ConfigParser() # オブジェクトの生成
+config.read(config_file) # config.iniファイルの全体読み込み
+try:
+    roll_trim = int(config['TRIM']['roll_trim'])   # roll_trimの読み込み
+    pitch_trim = int(config['TRIM']['pitch_trim']) # pitch_trimの読み込み
+except (KeyError, ValueError): # 読み込めなかった場合0 0を返す
+    roll_trim = 0
+    pitch_trim = 0
+
+try:
+    # ドローンとPCを接続する
+    drone.pair()
+    # トリム値を設定
+    drone.set_trim(roll_trim,pitch_trim) # トリム値を設定
+    time.sleep(1)
+    # 離陸する
+    drone.takeoff()
+    # 実行する関数
+    move_test(drone)
+except TimeoutError:
+    print("ドローンとの接続が失敗しました")
+finally:
+    print("プログラムを終了します")
     drone.land()
+    drone.close()
