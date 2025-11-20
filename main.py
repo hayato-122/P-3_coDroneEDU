@@ -2,7 +2,6 @@ import move_test3
 import nakamura
 import start
 import emergency_stop
-import move_test
 import move_test2
 import calibrate
 
